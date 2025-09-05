@@ -7,10 +7,10 @@ const notesContainer = document.getElementById('notes-container');
 const toggleThemeButton = document.getElementById('toggle-theme-button');
 const body = document.body;
 
-//  Colores que usaremos uwu
+//  Colores que usaremos uwu creando variable, pero que ya existen en el css y lo tomamos
 const colors = ['note-yellow', 'note-blue', 'note-pink', 'note-green', 'note-purple'];
 
-//  hacemos la funcion para crear nota, junto al delete botom
+//  hacemos la funcion para crear nota, junto al delete botom, tambien le asignamos una clase de css al Notediv y al deleteboton y el delete es hijo de notediv
 function createNoteElement(text, colorClass) {
     const noteDiv = document.createElement('div');
     noteDiv.classList.add('note', colorClass); 
@@ -24,7 +24,7 @@ function createNoteElement(text, colorClass) {
     return noteDiv;
 }
 
-// Guardar esas notas creadas para el local storgae
+// Guardar esas notas creadas para el local storgae usando queryselector 
 function saveNotes() {
     const notes = [];
     document.querySelectorAll('.note').forEach(note => {
@@ -35,7 +35,7 @@ function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 
-//  Cargar notas al inicio
+//  Cargar notas al inicio, usamos una function , cargamos con getitem 
 function loadNotes() {
     const storedNotes = localStorage.getItem('notes');
     if (storedNotes) {
@@ -56,12 +56,12 @@ function setInitialTheme() {
     }
 }
 
-//  habilita o desactiva ese boton jiji
+//  habilita o desactiva ese boton jiji, aqui es usando un adevenlistener 
 noteInput.addEventListener('input', () => {
     addButton.disabled = noteInput.value.trim() === '';
 });
 
-// alternar modo oscuro bb
+// alternar modo oscuro bb usando el estilo de dark mode, el cual esta en css
 toggleThemeButton.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     const isDarkMode = body.classList.contains('dark-mode');
@@ -104,7 +104,7 @@ notesContainer.addEventListener('dblclick', (event) => {
     }
 });
 
-//  Agregar nota
+//  Agregar nota usa
 addButton.addEventListener('click', () => {
     const noteText = noteInput.value.trim();
     if (noteText !== '') {
@@ -127,3 +127,4 @@ notesContainer.addEventListener('click', (event) => {
 });
 setInitialTheme();
 loadNotes();
+
